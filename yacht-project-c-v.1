@@ -1,0 +1,112 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "structYacht.h"
+
+/* Here I declare struct array and functions */
+
+struct yacht models [2];
+char m[5],n[7],p[7],h[7],q[7],w[5];
+void get (struct yacht *);
+void show (struct yacht *);
+int gtonnage (struct yacht *);
+int range (struct yacht *);
+int showSailYachts (struct yacht *, char yachtType[10]);
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char *argv[]) 
+{
+	
+	int i=0, x=0, count=0; 
+	struct yacht models[i] ;	
+	get(&models[i]);		
+	printf("\n");					
+	printf("Information about yachts: \n");
+	show(&models[i]);
+	printf("\n");
+	gtonnage(&models[i]);
+	printf("\n");
+	range(&models[i]);
+	printf("\n");
+	printf("Sailing yachts are %d", showSailYachts(&models[i],"sailing"));		
+	printf("\n pause");
+	return 0;
+}
+
+/* Here I determine functions */
+void get(struct yacht *d)
+	{
+		int i;
+		struct yacht models[i];
+		for (i=0;i<2;i++)
+		{
+		printf("\n Give name of yacht %d: ", (i+1)); fgets(d[i].name, 30 ,stdin);
+		printf("\n Give type of yacht %d: ", (i+1)); fgets(d[i].type, 7, stdin);
+		printf("\n Give the brand of yacht %d: ", (i+1)); fgets(d[i].brand, 30, stdin);		 
+		printf("\n Give the cruise speed of yacht %d, kn: ", (i+1)); gets(w);(d[i].cruisingSpeed=atoi(w));
+		printf("\n Give the yacht %d fuel consumption, l/h: ", (i+1)); gets(m);(d[i].consumption=atoi(m));
+		printf("\n Give the yacht %d fuel capacity, l: ", (i+1)); gets(h);(d[i].fuel=atof(h));
+		printf("\n Give the yacht %d length in feets: ", (i+1)); gets(n);(d[i].length=atof(n));	
+		printf("\n Give the yacht %d beam in feets: ", (i+1)); gets(p);(d[i].beam=atof(p));
+		printf("\n Give the yacht %d draft in feets: ", (i+1)); gets(q);(d[i].draft=atof(q)); 	
+		}			
+	}
+	
+void show (struct yacht *f)
+	{	
+		int i;
+		for(i=0;i<2;i++)	
+		{
+			printf ("\n ");
+			printf (" Yacht name is \" %s\",", f[i].name);
+			printf (" type is %s,", f[i].type);
+			printf (" from brand \"%s\".", f[i].brand);
+			printf (" \n Yacht cruisig speed is %d,", f[i].cruisingSpeed);
+			printf (" consumption is %d l/h, ", f[i].consumption);
+			printf (" fuel reserv is %.2f l ", f[i].fuel);
+       		printf ("\n Dimensions are: \n length - %.1f feets,", f[i].length);
+       		printf (" beam - %.1f feets,", f[i].beam);
+       		printf (" draft - %.1f feets", f[i].draft);
+			printf("\n");	
+		}			
+	}
+	
+int gtonnage (struct yacht *g)
+		{
+			float gton; 
+			int i;
+			for(i=0;i<2;i++)
+			{				
+				gton=((g[i].length*g[i].beam*g[i].draft)*0.67)/100;	
+				printf ("\n Gross tonnage of yacht %s is %.1f tones", g[i].name, gton);		
+			}				
+			return 0;
+		}				
+
+int range (struct yacht *p) 
+{
+	float ran;
+	int i;
+	for (i=0;i<2;i++)
+	{
+		ran=(p[i].cruisingSpeed*(p[i].fuel/p[i].consumption));
+		printf("\n Range of yacht %s is %.2f miles.", p[i].name, ran);
+	}
+	return 0;
+}
+
+int showSailYachts (struct yacht *d, char yachtType[10])
+{
+	int i, ret, count;
+	count=0;	
+	for (i=0;i<2;i++)
+	{	
+		ret=strcmp(d[i].type, yachtType);	
+		if(ret == 0)
+		{
+			count++;
+			return count;		
+		}			
+	}			
+}
